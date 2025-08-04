@@ -1,229 +1,182 @@
-# Gemini CLI with Databricks Support
-
-[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)
-
-![Gemini CLI Screenshot](./docs/assets/gemini-screenshot.png)
-
-This repository is a fork of the [Google Gemini CLI](https://github.com/google-gemini/gemini-cli) that adds support for Databricks as an AI provider. It maintains all the original functionality while extending it to work with Databricks models.
-
-This command-line AI workflow tool connects to your tools, understands your code and accelerates your workflows.
-
-With the Gemini CLI you can:
-
-- Query and edit large codebases in and beyond Gemini's 1M token context window.
-- Generate new apps from PDFs or sketches, using Gemini's multimodal capabilities.
-- Automate operational tasks, like querying pull requests or handling complex rebases.
-- Use tools and MCP servers to connect new capabilities, including [media generation with Imagen,
-  Veo or Lyria](https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio/tree/main/experiments/mcp-genmedia)
-- Ground your queries with the [Google Search](https://ai.google.dev/gemini-api/docs/grounding)
-  tool, built into Gemini.
-
-## Quickstart
-
-You have two options to install Gemini CLI.
-
-### With Node
-
-1. **Prerequisites:** Ensure you have [Node.js version 20](https://nodejs.org/en/download) or higher installed.
-2. **Run the CLI:** Execute the following command in your terminal:
-
-   ```bash
-   npx https://github.com/google-gemini/gemini-cli
-   ```
-
-   Or install it with:
-
-   ```bash
-   npm install -g @google/gemini-cli
-   ```
-
-   Then, run the CLI from anywhere:
-
-   ```bash
-   gemini
-   ```
-
-### With Homebrew
-
-1. **Prerequisites:** Ensure you have [Homebrew](https://brew.sh/) installed.
-2. **Install the CLI** Execute the following command in your terminal:
-
-   ```bash
-   brew install gemini-cli
-   ```
-
-   Then, run the CLI from anywhere:
-
-   ```bash
-   gemini
-   ```
-
-### Common Configuration steps
-
-3. **Pick a color theme**
-4. **Authenticate:** When prompted, sign in with your personal Google account. This will grant you up to 60 model requests per minute and 1,000 model requests per day using Gemini.
-
-You are now ready to use the Gemini CLI!
-
-### Use a Gemini API key:
-
-The Gemini API provides a free tier with [100 requests per day](https://ai.google.dev/gemini-api/docs/rate-limits#free-tier) using Gemini 2.5 Pro, control over which model you use, and access to higher rate limits (with a paid plan):
-
-1. Generate a key from [Google AI Studio](https://aistudio.google.com/apikey).
-2. Set it as an environment variable in your terminal. Replace `YOUR_API_KEY` with your generated key.
-
-   ```bash
-   export GEMINI_API_KEY="YOUR_API_KEY"
-   ```
-
-3. (Optionally) Upgrade your Gemini API project to a paid plan on the API key page (will automatically unlock [Tier 1 rate limits](https://ai.google.dev/gemini-api/docs/rate-limits#tier-1))
-
-### Use a Vertex AI API key:
-
-The Vertex AI API provides a [free tier](https://cloud.google.com/vertex-ai/generative-ai/docs/start/express-mode/overview) using express mode for Gemini 2.5 Pro, control over which model you use, and access to higher rate limits with a billing account:
-
-1. Generate a key from [Google Cloud](https://cloud.google.com/vertex-ai/generative-ai/docs/start/api-keys).
-2. Set it as an environment variable in your terminal. Replace `YOUR_API_KEY` with your generated key and set GOOGLE_GENAI_USE_VERTEXAI to true
-
-   ```bash
-   export GOOGLE_API_KEY="YOUR_API_KEY"
-   export GOOGLE_GENAI_USE_VERTEXAI=true
-   ```
-
-3. (Optionally) Add a billing account on your project to get access to [higher usage limits](https://cloud.google.com/vertex-ai/generative-ai/docs/quotas)
-
-For other authentication methods, including Google Workspace accounts, see the [authentication](./docs/cli/authentication.md) guide.
-
-### Use Databricks:
-
-This fork adds support for Databricks models:
-
-1. Set your Databricks workspace URL and personal access token:
-
-   ```bash
-   export DATABRICKS_URL="https://your-workspace.databricks.com"
-   export DBX_PAT="your_personal_access_token"
-   ```
-
-2. The default model is `databricks-claude-sonnet-4`. You can configure different models in `~/.gemini/config.json`.
-
-## Examples
-
-Once the CLI is running, you can start interacting with Gemini from your shell.
-
-You can start a project from a new directory:
-
-```sh
-cd new-project/
-gemini
-> Write me a Gemini Discord bot that answers questions using a FAQ.md file I will provide
+```
+██████   █████  ████████  █████  ██████  ██████  ██  ██████ ██   ██ ███████ 
+██   ██ ██   ██    ██    ██   ██ ██   ██ ██   ██ ██ ██      ██  ██  ██      
+██   ██ ███████    ██    ███████ ██████  ██████  ██ ██      █████   ███████ 
+██   ██ ██   ██    ██    ██   ██ ██   ██ ██   ██ ██ ██      ██  ██       ██ 
+██████  ██   ██    ██    ██   ██ ██████  ██   ██ ██  ██████ ██   ██ ███████ 
 ```
 
-Or work with an existing project:
+# dbx-cli: Databricks Command Line AI Assistant
 
-```sh
-git clone https://github.com/google-gemini/gemini-cli
-cd gemini-cli
-gemini
-> Give me a summary of all of the changes that went in yesterday
+
+
+**dbx-cli** is a community fork of [Google's Gemini CLI](https://github.com/google-gemini/gemini-cli) that extends support to Databricks foundational models. Built with the excellent Gemini CLI architecture, it brings the power of Databricks AI to your terminal while maintaining full compatibility with the original interface.
+
+## Fork Attribution
+
+This project is a fork of the official [Google Gemini CLI](https://github.com/google-gemini/gemini-cli), licensed under the Apache License 2.0. We maintain attribution to the original authors and comply with all license requirements. This is an independent community project and is not affiliated with or endorsed by Google.
+
+## Key Features
+
+With dbx-cli you can:
+
+- **Access Databricks Models**: Connect directly to your Databricks serving endpoints
+
+## Installation
+
+### Prerequisites
+
+- [Node.js version 20](https://nodejs.org/en/download) or higher
+- A Databricks workspace with deployed serving endpoints
+- A Databricks Personal Access Token (PAT)
+
+### Install from npm
+
+```bash
+npm install -g @dbx-cli/cli
 ```
 
-### Next steps
+Then run the CLI from anywhere:
 
-- Learn how to [contribute to or build from the source](./CONTRIBUTING.md).
-- Explore the available **[CLI Commands](./docs/cli/commands.md)**.
-- If you encounter any issues, review the **[troubleshooting guide](./docs/troubleshooting.md)**.
-- For more comprehensive documentation, see the [full documentation](./docs/index.md).
-- Take a look at some [popular tasks](#popular-tasks) for more inspiration.
-- Check out our **[Official Roadmap](./ROADMAP.md)**
-
-### Troubleshooting
-
-Head over to the [troubleshooting guide](docs/troubleshooting.md) if you're
-having issues.
-
-## Popular tasks
-
-### Explore a new codebase
-
-Start by `cd`ing into an existing or newly-cloned repository and running `gemini`.
-
-```text
-> Describe the main pieces of this system's architecture.
+```bash
+dbx
 ```
 
-```text
-> What security mechanisms are in place?
+## Quick Start
+
+### 1. Configure Databricks Authentication
+
+Set your Databricks workspace URL and Personal Access Token:
+
+```bash
+export DATABRICKS_URL="https://your-workspace.databricks.com"
+export DBX_PAT="your_personal_access_token"
 ```
 
-```text
-> Provide a step-by-step dev onboarding doc for developers new to the codebase.
+Or configure interactively within the CLI:
+
+```bash
+dbx
+> /databricks set --url=https://your-workspace.databricks.com --pat=your_token
+> /databricks enable
 ```
 
-```text
-> Summarize this codebase and highlight the most interesting patterns or techniques I could learn from.
+### 2. Select a Model
+
+The default model is `databricks-claude-sonnet-4`. To see available models in your workspace:
+
+```bash
+> /model list
 ```
 
-```text
-> Identify potential areas for improvement or refactoring in this codebase, highlighting parts that appear fragile, complex, or hard to maintain.
+To change the model:
+
+```bash
+> /model set databricks-meta-llama-3-3-70b-instruct
 ```
 
-```text
-> Which parts of this codebase might be challenging to scale or debug?
+### 3. Start Using dbx-cli
+
+Now you're ready to interact with your Databricks models:
+
+```bash
+> Write a Python function to analyze customer churn
+> Explain how Unity Catalog works
+> Help me optimize this Spark query
 ```
 
-```text
-> Generate a README section for the [module name] module explaining what it does and how to use it.
+## Authentication Options
+
+dbx-cli supports multiple authentication methods through the `/auth` command:
+
+### Databricks (Recommended for this fork)
+
+Configure your Databricks credentials as shown above, then:
+
+```bash
+> /auth
+# Select "Databricks" from the menu
 ```
 
-```text
-> What kind of error handling and logging strategies does the project use?
+### Other Supported Providers
+
+The fork maintains support for all original authentication methods:
+
+- **Google OAuth**: Sign in with your Google account
+- **Gemini API Key**: Use a key from [Google AI Studio](https://aistudio.google.com/apikey)
+- **Vertex AI**: Use Google Cloud credentials
+
+For detailed authentication options, see the [authentication guide](./docs/cli/authentication.md).
+
+## Databricks-Specific Commands
+
+### `/databricks` (aliases: `/dbx`, `/db`)
+
+Manage your Databricks connection:
+
+```bash
+# Show current configuration
+> /databricks show
+
+# Set credentials
+> /databricks set --url=https://workspace.databricks.com --pat=your_token
+
+# Enable Databricks authentication
+> /databricks enable
+
+# Clear configuration
+> /databricks clear
 ```
 
-```text
-> Which tools, libraries, and dependencies are used in this project?
+### `/model`
+
+Manage model selection:
+
+```bash
+# Show current model
+> /model show
+
+# List available models (dynamically fetched from your workspace)
+> /model list
+
+# Set a different model
+> /model set databricks-llama-4-maverick
+
+# Refresh model list from workspace
+> /model refresh
 ```
 
-### Work with your existing code
+### `/auth`
 
-```text
-> Implement a first draft for GitHub issue #123.
+Switch between authentication providers:
+
+```bash
+> /auth
+# Interactive menu to select between Databricks, Gemini, Vertex AI, or Google OAuth
 ```
 
-```text
-> Help me migrate this codebase to the latest version of Java. Start with a plan.
+## Contributing
+
+We welcome contributions! This is a community project focused on enhancing Databricks support. Please:
+
+1. Focus PRs on Databricks-related functionality
+2. Maintain compatibility with the original Gemini CLI
+3. Include tests for new features
+4. Update documentation as needed
+
+
+
+## Uninstall
+
+To uninstall dbx-cli:
+
+```bash
+npm uninstall -g @dbx-cli/cli
 ```
 
-### Automate your workflows
 
-Use MCP servers to integrate your local system tools with your enterprise collaboration suite.
+## License & Attribution
 
-```text
-> Make me a slide deck showing the git history from the last 7 days, grouped by feature and team member.
-```
+This project is licensed under the Apache License 2.0, the same as the original Google Gemini CLI. We maintain full attribution to the original authors and comply with all license requirements.
 
-```text
-> Make a full-screen web app for a wall display to show our most interacted-with GitHub issues.
-```
-
-### Interact with your system
-
-```text
-> Convert all the images in this directory to png, and rename them to use dates from the exif data.
-```
-
-```text
-> Organize my PDF invoices by month of expenditure.
-```
-
-### Uninstall
-
-Head over to the [Uninstall](docs/Uninstall.md) guide for uninstallation instructions.
-
-## Terms of Service and Privacy Notice
-
-For details on the terms of service and privacy notice applicable to your use of Gemini CLI, see the [Terms of Service and Privacy Notice](./docs/tos-privacy.md).
-
-## Security Disclosures
-
-Please see our [security disclosure process](SECURITY.md). All [security advisories](https://github.com/google-gemini/gemini-cli/security/advisories) are managed on Github.
+**Important**: This is an independent community fork and is not affiliated with, endorsed by, or supported by Google or Databricks.
